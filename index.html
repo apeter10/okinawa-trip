@@ -117,6 +117,70 @@
   .btnlink{background:#2b6cb0}
   .btnlink:hover{background:#1f527f}
   code{background:#222e3c}
+
+  /* ============================================================
+     RWD 行動裝置響應式（手機 / 平板）
+     - 寬表格於窄螢幕改為「卡片堆疊」，免左右滑動
+     - 標題、間距、點擊區依螢幕尺寸縮放
+     ============================================================ */
+  td.wide{min-width:240px}              /* 桌機：行程總覽「路線順序」欄較寬 */
+
+  /* 平板與大尺寸手機（≤768px） */
+  @media (max-width:768px){
+    body{font-size:14.5px}
+    header.hero{padding:22px 14px 18px}
+    header.hero h1{font-size:1.35rem}
+    header.hero p{font-size:.9rem}
+    header.hero .btnlink{margin-top:10px}
+    .container{padding:0 12px 48px}
+    section{margin-top:24px}
+    h2.sec{font-size:1.12rem;padding-left:10px;border-left-width:5px}
+    h3{font-size:1rem}
+    .card{padding:14px}
+    .banner{font-size:.88rem;padding:12px 13px}
+    .day-head{padding:12px 14px}
+    .day-head h3{font-size:1.05rem}
+    .day-body{padding:12px 13px}
+    .mapbox{height:320px}
+    .toc a{padding:7px 13px}            /* 加大點擊區，方便手指點選 */
+  }
+
+  /* 手機直式（≤560px） */
+  @media (max-width:560px){
+    body{overflow-x:hidden}            /* 安全防護：避免任何元素撐破畫面寬度 */
+    header.hero h1{font-size:1.2rem;line-height:1.45}
+    header.hero p{font-size:.86rem}
+    header.hero .btnlink{display:block;text-align:center}
+
+    /* 章節導覽列：改為可橫向滑動的單列（不換行、隱藏捲軸） */
+    .toc{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+         padding-bottom:6px;scrollbar-width:none}
+    .toc::-webkit-scrollbar{display:none}
+    .toc a{flex:0 0 auto;white-space:nowrap}
+
+    h2.sec{font-size:1.05rem}
+    .seg-label{font-size:.9rem}
+    .stop{padding:10px 11px}
+    .stop .name{font-size:.95rem}
+    .stop dl{grid-template-columns:1fr;gap:0}   /* 標籤獨立成行，數值佔滿寬度 */
+    .stop dt{margin-top:7px}
+    .stop dd{margin:1px 0 0}
+    .mapbox{height:260px}
+
+    /* 寬表格 → 卡片堆疊：每列變一張卡，欄名以 data-label 顯示於每格前 */
+    .tablewrap{overflow-x:visible;box-shadow:none;border-radius:0}
+    table{font-size:.85rem;background:transparent;border-radius:0}
+    table thead{display:none}
+    table tr{display:block;background:var(--card);border:1px solid var(--line);
+             border-radius:10px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+    table td{display:flex;gap:10px;align-items:flex-start;border:none;
+             border-bottom:1px solid var(--line);padding:8px 12px;
+             min-width:0!important;overflow-wrap:anywhere}
+    table td:last-child{border-bottom:none}
+    table td::before{content:attr(data-label);flex:0 0 84px;font-weight:700;
+                     color:var(--brand-d);white-space:nowrap}
+    table td:empty{display:none}
+  }
 </style>
 </head>
 <body>
@@ -806,8 +870,9 @@ document.getElementById("weatherCard").innerHTML=WEATHER_HTML;
     ["Day5 07/29(三)","South Wind House→波上宮→mana→還車(金城)→那霸機場","(博物館備案)","波上宮","おきみゅー/DFS","mana(純素)","(航班)"]
   ];
   document.getElementById("overviewTable").innerHTML=
-    "<tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr>"+
-    rows.map(r=>"<tr>"+r.map((c,i)=>"<td"+(i===1?" style='min-width:240px'":"")+">"+c+"</td>").join("")+"</tr>").join("");
+    "<thead><tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr></thead><tbody>"+
+    rows.map(r=>"<tr>"+r.map((c,i)=>"<td data-label='"+head[i]+"'"+(i===1?" class='wide'":"")+">"+c+"</td>").join("")+"</tr>").join("")+
+    "</tbody>";
 })();
 
 /* ============================================================
@@ -889,9 +954,9 @@ function dayDirUrl(day){
   const head=["日期","原室外景點","原時段","雨天備案","備案類型","親子","適合大人","是否順路","Maps","備註"];
   let rows="";
   RAIN.forEach(r=>{const p=P[r.id];
-    rows+="<tr><td>"+r.day+"</td><td>"+r.out+"</td><td>"+r.when+"</td><td><b>"+r.backup+"</b></td><td>"+r.type+"</td><td>"+r.kid+"</td><td>"+r.adult+"</td><td>"+r.near+"</td><td><a href='"+gmapsSearch(p.q)+"' target='_blank' rel='noopener'>開啟</a></td><td class='small'>"+r.note+"</td></tr>";
+    rows+="<tr><td data-label='日期'>"+r.day+"</td><td data-label='原室外景點'>"+r.out+"</td><td data-label='原時段'>"+r.when+"</td><td data-label='雨天備案'><b>"+r.backup+"</b></td><td data-label='備案類型'>"+r.type+"</td><td data-label='親子'>"+r.kid+"</td><td data-label='適合大人'>"+r.adult+"</td><td data-label='是否順路'>"+r.near+"</td><td data-label='Maps'><a href='"+gmapsSearch(p.q)+"' target='_blank' rel='noopener'>開啟</a></td><td data-label='備註' class='small'>"+r.note+"</td></tr>";
   });
-  document.getElementById("rainTable").innerHTML="<tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr>"+rows;
+  document.getElementById("rainTable").innerHTML="<thead><tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr></thead><tbody>"+rows+"</tbody>";
 })();
 
 /* ============================================================
