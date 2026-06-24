@@ -142,7 +142,7 @@
     .day-head h3{font-size:1.05rem}
     .day-body{padding:12px 13px}
     .mapbox{height:320px}
-    .toc a{padding:7px 13px}            /* 加大點擊區，方便手指點選 */
+    .toc a{padding:9px 14px}            /* 加大點擊區（約 40px），方便手指點選 */
   }
 
   /* 手機直式（≤560px） */
@@ -152,16 +152,15 @@
     header.hero p{font-size:.86rem}
     header.hero .btnlink{display:block;text-align:center}
 
-    /* 章節導覽列：改為可橫向滑動的單列（不換行、隱藏捲軸） */
-    .toc{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
-         padding-bottom:6px;scrollbar-width:none}
-    .toc::-webkit-scrollbar{display:none}
-    .toc a{flex:0 0 auto;white-space:nowrap}
+    /* 章節導覽列自動換行，6 個章節全部可見（不藏於橫向捲動之外） */
+    .btnlink{padding:9px 14px}          /* 按鈕加高至約 40px 點擊區 */
 
     h2.sec{font-size:1.05rem}
     .seg-label{font-size:.9rem}
     .stop{padding:10px 11px}
     .stop .name{font-size:.95rem}
+    /* 站名連結擴大點擊區（負 margin 抵銷，版面不位移） */
+    .stop .name a{display:inline-block;padding:8px 6px;margin:-8px -6px}
     .stop dl{grid-template-columns:1fr;gap:0}   /* 標籤獨立成行，數值佔滿寬度 */
     .stop dt{margin-top:7px}
     .stop dd{margin:1px 0 0}
@@ -170,7 +169,9 @@
     /* 寬表格 → 卡片堆疊：每列變一張卡，欄名以 data-label 顯示於每格前 */
     .tablewrap{overflow-x:visible;box-shadow:none;border-radius:0}
     table{font-size:.85rem;background:transparent;border-radius:0}
-    table thead{display:none}
+    /* 視覺隱藏表頭（但保留於 DOM／無障礙樹，螢幕報讀器仍可讀到欄名） */
+    table thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+                overflow:hidden;clip:rect(0,0,0,0);border:0;white-space:nowrap}
     table tr{display:block;background:var(--card);border:1px solid var(--line);
              border-radius:10px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
     table td{display:flex;gap:10px;align-items:flex-start;border:none;
@@ -179,7 +180,8 @@
     table td:last-child{border-bottom:none}
     table td::before{content:attr(data-label);flex:0 0 84px;font-weight:700;
                      color:var(--brand-d);white-space:nowrap}
-    table td:empty{display:none}
+    /* 表格內動作連結（如「開啟」）給足約 40px 點擊區 */
+    table td a{display:inline-flex;align-items:center;min-height:40px;padding:0 8px}
   }
 </style>
 </head>
