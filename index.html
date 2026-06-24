@@ -125,6 +125,7 @@
     <h1>沖繩 5 天 4 夜 家族自由行</h1>
     <p>2026/07/25（六）– 07/29（三）｜桃園 ⇄ 那霸｜自駕｜11 人（大人 8・小孩 3：11/8/6 歲）</p>
     <p>全員蛋奶素（可蛋奶起司優格／不吃肉魚海鮮、柴魚高湯、肉湯、魚露、豬油、五辛）</p>
+    <p><a class="btnlink" href="https://www.google.com/maps/d/u/0/edit?mid=1q6cc6rdhvmgIsnAdmO_UXFOw_GqDbP4&usp=sharing" target="_blank" rel="noopener">🗺️ 開啟我的 Google 地圖（自訂景點地圖）</a></p>
     <div class="toc" id="toc"></div>
   </div>
 </header>
@@ -136,8 +137,6 @@
     <div class="banner note">
       <b>🔧 出發前務必優先處理（高優先待確認）</b>
       <ul class="tight">
-        <li><b>兩間住宿請向業者確認可一次入住 11 人（8 大 3 小）</b>：コンフォートハウス（前 2 晚·中部うるま，一棟貸最多約 12 人、僅 1 衛浴、免費停車 2 台需確認車位）；South Wind House（後 2 晚·南部南城，Google 地圖 ★4.6 民宿、附私人停車場）。兩者聯絡電話同為 +81 50-5846-7093。</li>
-        <li><b>2026/07/27（Day 3）為週一：</b>午餐維持「Bollywood Dreams」（Google 確認<b>週一午餐 11:00–15:00 營業</b>，五辛須電話確認）。晚餐改蔬食「Saborami」（純素拉麵可去五辛、週一營業，但 <b>19:00 打烊</b>，溫泉需縮短、約 18:30 前到）；「ROTTON」為全素但僅營業至 14:00（不供晚餐）。詳見 Day 3。</li>
         <li><b>需事先電話預約：</b>Tamatebako（自然派食堂タマテバコ 098-943-2567）、mana（098-943-1487，僅電話、僅 11:00 一輪、現金）、山の茶屋 楽水（098-948-1227）、Orca 水中觀光船（098-866-0489，已要求兩天前預訂、15:10 集合）。</li>
         <li><b>租車：</b>沖縄行脚レンタカー（FootPrint，098-995-9613）取車時間／機場接送點需以 LINE 約定；11 人需多車＋ 3 張兒童安全座椅（11/8/6 歲）請預約時告知。</li>
       </ul>
@@ -202,32 +201,21 @@
       <span class="p-in pill">室內</span>
       <span class="p-out pill">室外</span>
       <span class="p-both pill">室內外</span>
-      <span class="p-ok pill">蛋奶素友善</span>
       <span class="p-warn pill">需向店家確認</span>
       <span class="p-bad pill">高風險／公休</span>
-      <span class="p-kid pill">親子友善</span>
     </p>
     <div id="dayContainer"></div>
   </section>
 
-  <!-- 4. 動線總覽 -->
-  <section id="route" class="anchor">
-    <h2 class="sec">4. 景點地圖與動線總覽</h2>
-    <div class="tablewrap"><table id="routeTable"></table></div>
-    <div class="banner note" style="margin-top:12px">
-      <b>移動時間提醒（120 分鐘原則）：</b><b>全部單段車程皆在 120 分內 ✅</b>。前 2 晚改住中部うるま後，Day 2「うるま → 本部（美麗海）」約 85 分，較住南部省約 40 分；Day 2 仍是全程駕駛最多的一天（北部往返），建議 09:00 準時出發、走沖繩自動車道、中途休息站補給。Day 3 為換宿日、停點多但動線由北而南、各段皆短。
-    </div>
-  </section>
-
-  <!-- 5. 雨天備案 -->
+  <!-- 4. 雨天備案 -->
   <section id="rain" class="anchor">
-    <h2 class="sec">5. 雨天備案總表</h2>
+    <h2 class="sec">4. 雨天備案總表</h2>
     <div class="tablewrap"><table id="rainTable"></table></div>
   </section>
 
-  <!-- 6. 天氣 -->
+  <!-- 5. 天氣 -->
   <section id="weather" class="anchor">
-    <h2 class="sec">6. 天氣風險與行程調整建議（沖繩 7 月下旬）</h2>
+    <h2 class="sec">5. 天氣風險與行程調整建議（沖繩 7 月下旬）</h2>
     <div class="card" id="weatherCard"></div>
   </section>
 
@@ -785,7 +773,7 @@ function isMeal(p){return /餐廳|咖啡/.test(p.cat||"");}
    渲染：TOC
    ============================================================ */
 const TOC=[["status","核對狀態"],["info","基本資訊"],["overview","行程總覽"],
-  ["days","每日行程"],["route","動線總覽"],["rain","雨天備案"],["weather","天氣"]];
+  ["days","每日行程"],["rain","雨天備案"],["weather","天氣"]];
 document.getElementById("toc").innerHTML=TOC.map(t=>'<a href="#'+t[0]+'">'+t[1]+'</a>').join("");
 
 /* 透過 htmlpreview 預覽時，它會注入 <base> 指向 raw 原始碼網址，使得 #錨點 連結被導去原始碼頁。
@@ -809,17 +797,17 @@ document.getElementById("weatherCard").innerHTML=WEATHER_HTML;
    渲染：行程總覽表
    ============================================================ */
 (function(){
-  const head=["日期","住宿","主要區域","重點行程","室內景點","室外景點","雨天備案","午餐","晚餐","超市採買","單段≤120分？","飲食符合度"];
+  const head=["日期","路線順序","室內景點","室外景點","雨天備案","午餐","晚餐"];
   const rows=[
-    ["Day1 07/25(六)","→ コンフォートハウス(うるま)","南部豐崎/那霸→中部うるま","落地・取車・雙商場・貓咖啡","iias/DMM水族館・貓咖啡","ASHIBINAA(半戶外)","iias＋DMM水族館","丼なんと屋(機場)","樂園CAFE","San-A 石川","✅ 皆<120分","蛋奶素：部分可；去五辛多需確認"],
-    ["Day2 07/26(日)","コンフォートハウス(うるま)","北部本部/今歸仁/恩納","美麗海・海洋博・古宇利戲水","美麗海水族館","海洋博公園・古宇利海灘","古宇利海洋塔/水族館","海洋博野餐(自備)","GAJIMARU(純素)","San-A 石川","✅ 皆<120分","晚餐純素佳；去五辛需確認"],
-    ["Day3 07/27(一)","→ South Wind House(南城)","換宿:うるま→北谷→那霸→瀨長島→南城","美國村・Orca船・龍神之湯","龍神之湯內湯・商場","美國村・船甲板・瀨長島","美國村室內/AEON Rycom","Bollywood Dreams(週一營業)","Saborami(純素·至19:00)／ROTTON(僅白天)","San-A 大里","✅ 皆<120分","晚餐改蔬食；午餐 Bollywood 五辛需確認"],
-    ["Day4 07/28(二)","South Wind House(南城)","南部文化＋那霸","玉泉洞・EISA・國際通","玉泉洞・博物館","(玉泉洞城下町)","國際通拱廊/おきみゅー","山之茶屋 樂水","Tamatebako(純素)","San-A 大里","✅ 皆<120分","晚餐純素佳；午餐需嚴格確認柴魚"],
-    ["Day5 07/29(三)","(退房→機場)","南城→那霸市區","波上宮・mana・還車","(博物館備案)","波上宮","おきみゅー/DFS","mana(純素)","(航班)","—(前晚已備)","✅ 皆<120分","午餐純素佳；去五辛需確認"]
+    ["Day1 07/25(六)","機場→租車→ASHIBINAA→iias豐崎→樂園CAFE(那霸)→San-A石川→コンフォートハウス","iias/DMM水族館・貓咖啡","ASHIBINAA(半戶外)","iias＋DMM水族館","丼なんと屋(機場)","樂園CAFE"],
+    ["Day2 07/26(日)","コンフォートハウス→美麗海/海洋博→古宇利→GAJIMARU(恩納)→San-A石川→飯店","美麗海水族館","海洋博公園・古宇利海灘","古宇利海洋塔/水族館","海洋博野餐(自備)","GAJIMARU(純素)"],
+    ["Day3 07/27(一)","コンフォートハウス→美國村→那霸港Orca→瀨長島龍神之湯→Saborami(晚餐)→San-A大里→South Wind House","龍神之湯內湯・商場","美國村・船甲板・瀨長島","美國村室內/AEON Rycom","Bollywood Dreams(週一營業)","Saborami(純素·至19:00)／ROTTON(僅白天)"],
+    ["Day4 07/28(二)","South Wind House→玉泉洞→山之茶屋→國際通→Tamatebako→San-A大里→飯店","玉泉洞・博物館","(玉泉洞城下町)","國際通拱廊/おきみゅー","山之茶屋 樂水","Tamatebako(純素)"],
+    ["Day5 07/29(三)","South Wind House→波上宮→mana→還車(金城)→那霸機場","(博物館備案)","波上宮","おきみゅー/DFS","mana(純素)","(航班)"]
   ];
   document.getElementById("overviewTable").innerHTML=
     "<tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr>"+
-    rows.map(r=>"<tr>"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("");
+    rows.map(r=>"<tr>"+r.map((c,i)=>"<td"+(i===1?" style='min-width:240px'":"")+">"+c+"</td>").join("")+"</tr>").join("");
 })();
 
 /* ============================================================
@@ -841,7 +829,7 @@ document.getElementById("weatherCard").innerHTML=WEATHER_HTML;
       html+='<div class="top"><span class="time mono">'+it.t+'</span>'+
             '<span class="name"><a href="'+gmapsSearch(p.q)+'" target="_blank" rel="noopener">'+p.zh+'</a></span>'+
             '<span class="pill p-cat">'+roleLabel(it.role,p)+'</span>'+ioPill(p.io)+
-            (p.kid?'<span class="pill p-kid">親子友善</span>':"")+dietPills(p)+'</div>';
+            (isMeal(p)?dietPills(p):"")+'</div>';
       // 行車
       if(it.pdrive&&it.pdrive!=="—")
         html+='<div class="seglog">↳ 與上一站：車程 '+it.pdrive+'　距離 '+it.pdist+'　<span class="small">（Google Maps·以當日路況為準）</span></div>';
@@ -853,18 +841,15 @@ document.getElementById("weatherCard").innerHTML=WEATHER_HTML;
       if(p.hours) html+='<dt>營業時間</dt><dd>'+p.hours+'</dd>';
       if(isMeal(p)){
         html+='<dt>飲食確認</dt><dd>'+(p.veg?p.veg+'｜':'')+'蛋奶素：'+(p.lo||'—')+'｜去五辛：'+(p.fs||'—')+'</dd>';
-        if(p.order) html+='<dt>點餐備註</dt><dd>'+p.order+'</dd>';
       }
-      if(p.confirm) html+='<dt>需確認</dt><dd>'+p.confirm+(p.tel?'　☎ '+p.tel:'')+'</dd>';
       if(it.rain) html+='<dt>雨天備案</dt><dd>'+it.rain+'</dd>';
-      if(it.heat) html+='<dt>高溫/日曬</dt><dd>'+it.heat+'</dd>';
       if(it.x) html+='<dt>注意事項</dt><dd>'+it.x+'</dd>';
       html+='</dl>';
       // 替代方案
       if(it.alt){
         html+='<div style="margin-top:8px;padding:9px 11px;background:var(--warnbg);border:1px solid #efd79a;border-radius:8px"><b>↻ 替代方案：</b>';
         it.alt.forEach(aid=>{const ap=P[aid];
-          html+='<div style="margin-top:5px"><a href="'+gmapsSearch(ap.q)+'" target="_blank" rel="noopener"><b>'+ap.zh+'</b></a> '+ioPill(ap.io)+dietPills(ap)+'<br><span class="small">'+ap.hours+'｜'+ratingLine(ap)+'<br>'+(ap.order||"")+' '+(ap.confirm?'｜需確認：'+ap.confirm:'')+(ap.tel?'　☎ '+ap.tel:'')+'</span></div>';
+          html+='<div style="margin-top:5px"><a href="'+gmapsSearch(ap.q)+'" target="_blank" rel="noopener"><b>'+ap.zh+'</b></a> '+ioPill(ap.io)+dietPills(ap)+'<br><span class="small">'+ap.hours+'｜'+ratingLine(ap)+(ap.tel?'<br>☎ '+ap.tel:'')+'</span></div>';
         });
         html+='</div>';
       }
@@ -910,22 +895,6 @@ function dayDirUrl(day){
 })();
 
 /* ============================================================
-   渲染：動線總覽表
-   ============================================================ */
-(function(){
-  const head=["日期","主要區域","路線順序","各段車程(Google)","各段距離(Google)","≤120分?","備註"];
-  const data=[
-    ["Day1","南部豐崎/那霸→中部うるま","機場→租車→ASHIBINAA→iias豐崎→樂園CAFE(那霸)→San-A石川→コンフォートハウス","10/18/4/21/54/4 分","4.4/5.7/1.3/8.8/35.6/2.1 km","✅","白天南部、傍晚北上回中部住宿（末段約 54 分）。"],
-    ["Day2","北部本部/今歸仁/恩納","コンフォートハウス→美麗海/海洋博→古宇利→GAJIMARU(恩納)→San-A石川→飯店","71/32/64/14/4 分","57.7/18.8/53.8/6.9/2.1 km","✅","住中部使北部往返縮短，全段<120分。"],
-    ["Day3","うるま→北谷→那霸→瀨長島→南城","コンフォートハウス→美國村→那霸港Orca→瀨長島龍神之湯→Saborami(晚餐)→San-A大里→South Wind House","33/41/26/18/19/14 分","15.8/17.5/7.4/8.4/8.0/5.3 km","✅","換宿日由北而南，動線順。"],
-    ["Day4","南部+那霸","South Wind House→玉泉洞→山之茶屋→國際通→Tamatebako→San-A大里→飯店","5/10/44/7/27/14 分","3.1/5.5/16.5/1.2/8.2/5.3 km","✅","南部景點就在飯店旁，最輕鬆。"],
-    ["Day5","南城→那霸市區","South Wind House→波上宮→mana→還車(金城)→那霸機場","33/10/20/7 分","12.0/2.8/4.3/1.9 km","✅","集中那霸，14:00 還車、預留報到。"]
-  ];
-  document.getElementById("routeTable").innerHTML="<tr>"+head.map(h=>"<th>"+h+"</th>").join("")+"</tr>"+
-    data.map(r=>"<tr>"+r.map((c,i)=>"<td"+(i===2?" style='min-width:240px'":"")+">"+c+"</td>").join("")+"</tr>").join("");
-})();
-
-/* ============================================================
    Google Maps：每日路線 + 編號標記 + 各段車程 + Geometry 距離
    （若金鑰有來源網域限制而失敗，自動切換為免金鑰路線地圖）
    ============================================================ */
@@ -953,7 +922,7 @@ function activateMapFallback(){
     const legEl=document.getElementById("leg-day"+day.n);
     if(legEl) legEl.innerHTML='<b>ℹ️ 內嵌互動地圖未顯示。</b>此金鑰設有「HTTP 參照網址（referrer）」來源限制，於未授權網址會出現 <code>RefererNotAllowedMapError</code>。'+
       '<b>解法：</b>在 Google Cloud Console → 憑證 → 此金鑰 → 把開啟本頁的網址加入允許清單，並啟用 Maps JavaScript API 與 Directions API，重新整理後即會顯示「編號標記＋各段即時車程＋Geometry 直線距離」的完整互動地圖。'+
-      '在此之前，上方站點與「開啟整日路線」按鈕均可正常使用；各段估算車程／距離見「4. 景點地圖與動線總覽」。';
+      '在此之前，上方站點與「開啟整日路線」按鈕均可正常使用；各段估算車程／距離見上方各站「↳ 與上一站」標註。';
   });
 }
 // Google Maps JS 官方驗證失敗回呼
